@@ -1,2 +1,2 @@
-# web-app-yadro-impuls
-Тестовое задание для Yadro Impuls 2025
+# Веб-приложение для стажировки Yadro Impuls 2025
+
