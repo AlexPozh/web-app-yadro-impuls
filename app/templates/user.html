@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}
+    User page
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <img src="{{ user.photo_url }}" class="user-photo">
+        
+        <div class="user-info">
+            <div>Имя: {{ user.name }}</div>
+            <div>Фамилия: {{ user.surname }}</div>
+            <div>Пол: {{ user.gender.value }}</div>
+            <div>Телефон: {{ user.phone_number }}</div>
+            <div>Email: {{ user.email }}</div>
+            <div>Место проживания: {{ location }}</div>
+        </div>
+    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 600px;
+            background-color: #e3e3e3;
+        }
+        
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .user-photo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+    </style>
+{% endblock %}

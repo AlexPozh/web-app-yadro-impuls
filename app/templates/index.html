@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Main page
+{% endblock %}
+
+{% block content %}
+    <form action="/homepage/load_users" method="POST">
+        <label for="count">Количество новых пользователей:</label>
+        <input type="number" id="count" name="count" min="1" max="1000" required/>
+        <button type="submit">Загрузить</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Фото</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Пол</th>
+                <th>Телефон</th>
+                <th>Email</th>
+                <th>Страна проживания</th>
+                <th>Страница пользователя</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td><img src="{{ user.photo_url }}"></td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.surname }}</td>
+                    <td>{{ user.gender }}</td>
+                    <td>{{ user.phone_number }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.country }}</td>
+                    <td><a href="/homepage/{{ user.id }}">ТЫК</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        {% if page > 1 %}
+            <a href="/homepage/?page={{ page - 1 }}&size={{ size }}">&lt;</a>
+        {% endif %}
+
+        <span>Странциа {{ page }} из {{ total_page }}</span>
+
+        {% if page < total_page %}
+            <a href="/homepage/?page={{ page + 1 }}&size={{ size }}">&gt;</a>
+        {% endif %}
+    </div>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        label {
+            font-size: 16px;
+        }
+
+        #count {
+            width: 100px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 6px 15px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: rgb(111, 149, 214);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        thead {
+            background-color: #f0f0f0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            font-weight: bold;
+            background-color: #d0d0d0;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        td a {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        td a:hover {
+            background-color: rgb(111, 149, 214);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+{% endblock %}
