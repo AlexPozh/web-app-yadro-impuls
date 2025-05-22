@@ -1,0 +1,15 @@
+FROM python:3.12-alpine
+
+RUN pip install poetry
+
+WORKDIR /app
+
+COPY pyproject.toml poetry.lock ./
+
+RUN poetry config virtualenvs.create false && poetry install
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["poetry", "run", "python3", "main.py"]
