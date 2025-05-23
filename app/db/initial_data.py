@@ -3,7 +3,6 @@ import logging
 
 from sqlalchemy import select, exists
 from sqlalchemy.exc import DBAPIError
-import httpx
 
 from app.utils.api_client import fetch_api_data
 from app.utils.process_data import process_user_data
@@ -30,10 +29,6 @@ async def initialize_users(
             logger.info("Database already exists data")
     except DBAPIError as e:
         logger.exception("Database initializing failed", e)
-    except httpx.HTTPStatusError as e:
-        logger.exception("Response error, initializing failed - %r", e)
-    except httpx.RequestError as e:
-        logger.exception("Request failed, initializing failed - %r", e)
 
 async def _is_db_empty(
     session: "AsyncSession"

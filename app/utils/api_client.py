@@ -13,7 +13,7 @@ async def fetch_api_data(url: str) -> list[dict[str, Any]] | None:
             return response.json()["results"]
     except httpx.HTTPStatusError as e:
         logger.exception("Response error - %r", e)
-        raise
+        return None
     except httpx.RequestError as e:
         logger.exception("Request failed - %r", e)
-        raise
+        return None
