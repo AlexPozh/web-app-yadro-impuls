@@ -5,7 +5,7 @@ import httpx
 
 logger = logging.getLogger("development")
 
-async def fetch_api_data(url: str) -> dict[str, Any] | None:
+async def fetch_api_data(url: str) -> list[dict[str, Any]] | None:
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(url)
