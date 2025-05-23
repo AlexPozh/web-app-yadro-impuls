@@ -121,4 +121,4 @@ async def post_new_users(
         )
     except DBAPIError as e:
         logger.exception("Database opetaion is failed - %r", e)
-        return HTTPException(status_code=500, detail="Internal server error")
+        raise HTTPException(status_code=500, detail="Internal server error")
